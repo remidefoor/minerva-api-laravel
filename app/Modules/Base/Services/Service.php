@@ -8,7 +8,7 @@ use Illuminate\Support\MessageBag;
 
 abstract class Service
 {
-    protected $model;
+    private $model;
     private $result;
     private $errors;
     protected $validationRules;
@@ -17,7 +17,6 @@ abstract class Service
     {
         $this->model = $model;
         $this->errors = new MessageBag();
-        $this->validationRules = [];
     }
 
     public function getResult()
@@ -41,5 +40,9 @@ abstract class Service
 
         $validator = Validator::make($data, $this->validationRules);
         if ($validator->fails()) $this->errors = $validator->errors();
+    }
+
+    protected function find($id) {
+        return $this->model->find($id);
     }
 }
