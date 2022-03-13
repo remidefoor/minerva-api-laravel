@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ Route::post('/register', function () {});
 Route::post('/login', function () {});
 
 // books
-Route::get('/books', function () {});
-Route::post('/books', function () {});
-Route::delete('/books/{isbn}', function () {});
+Route::get('/books', [BookApiController::class, 'getBooks']);
+Route::post('/books', [BookApiController::class, 'addBook']);
+Route::delete('/books/{isbn}', [BookApiController::class, 'deleteBook']);
 
 // notes
 Route::get('/books/{isbn}/notes', function () {});
