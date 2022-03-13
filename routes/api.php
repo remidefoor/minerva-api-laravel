@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// auth
+Route::post('/register', function () {});
+Route::post('/login', function () {});
+
+// books
+Route::get('/books', function () {});
+Route::post('/books', function () {});
+Route::delete('/books/{isbn}', function () {});
+
+// notes
+Route::get('/books/{isbn}/notes', function () {});
+Route::post('/books/{isbn}/notes', function () {});
+Route::delete('/books/{isbn}/notes/{id}', function () {});
