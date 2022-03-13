@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookApiController;
+use App\Http\Controllers\NoteApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,6 @@ Route::post('/books', [BookApiController::class, 'addBook']);
 Route::delete('/books/{isbn}', [BookApiController::class, 'deleteBook']);
 
 // notes
-Route::get('/books/{isbn}/notes', function () {});
-Route::post('/books/{isbn}/notes', function () {});
-Route::delete('/books/{isbn}/notes/{id}', function () {});
+Route::get('/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
+Route::post('/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
+Route::delete('/books/{isbn}/notes/{id}', [NoteApiController::class, 'deleteNote']);
