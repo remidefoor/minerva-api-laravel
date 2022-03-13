@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 
 class BookApiController extends Controller
 {
-   public function getBooks() {
+   public function getBooks()
+   {
 
    }
 
-   public function addBook(Request $request) {
+   public function addBook(Request $request)
+   {
 
    }
 
-   public function deleteBook($isbn) {
+   public function deleteBook($isbn)
+   {
 
    }
 }
