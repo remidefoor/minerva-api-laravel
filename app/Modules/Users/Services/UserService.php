@@ -8,9 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserService extends Service
 {
-    protected $validationRules = [];
+    protected $validationRules = [
+        'email' => ['email', 'required', 'unique:users'],
+        'password' => ['string', 'required']
+    ];
 
     public function __construct(User $model) {
         parent::__construct($model);
+    }
+
+    public function create($data) {
+        $this->validate($data);
+        if (!$this->hasErrors()) {
+            $this->model->create($data);
+        }
     }
 }

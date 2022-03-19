@@ -8,7 +8,7 @@ use Illuminate\Support\MessageBag;
 
 abstract class Service
 {
-    private $model;
+    protected $model;
     private $result;
     private $errors;
     protected $validationRules;
