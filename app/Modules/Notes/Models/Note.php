@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Modules\Books\Models;
+namespace App\Modules\Notes\Models;
 
 use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookUser extends Model
+class Note extends Model
 {
     protected $fillable = [
         'ISBN',
         'user_id',
+        'note',
     ];
 
     public function user() {

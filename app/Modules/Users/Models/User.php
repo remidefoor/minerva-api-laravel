@@ -2,8 +2,8 @@
 
 namespace App\Modules\Users\Models;
 
-use App\Models\BookUser;
-use App\Models\Note;
+use App\Modules\Books\Models\BookUser;
+use App\Modules\Notes\Models\Note;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
