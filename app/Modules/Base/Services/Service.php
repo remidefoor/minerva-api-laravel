@@ -42,7 +42,7 @@ abstract class Service
         if ($validator->fails()) $this->errors = $validator->errors();
     }
 
-    protected function find($id) {
+    public function find($id) {
         return $this->model->find($id);
     }
 }

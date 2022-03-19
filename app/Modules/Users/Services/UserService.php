@@ -17,7 +17,7 @@ class UserService extends Service
         parent::__construct($model);
     }
 
-    public function create($data) {
+    public function createUser($data) {
         $this->validate($data);
         if (!$this->hasErrors()) {
             $this->model->create($data);

@@ -9,7 +9,7 @@ class UserApiController extends Controller
 {
     public function createUser(UserService $service, Request $request) {
         $data = $request->all();
-        $service->create($data);
+        $service->createUser($data);
         if ($service->hasErrors()) {
             return response(['errors' => $service->getErrors()])
                 ->setStatusCode(400);

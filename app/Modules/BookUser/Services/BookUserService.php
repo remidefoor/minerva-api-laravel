@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\Books\Services;
+namespace App\Modules\BookUser\Services;
 
 use App\Modules\Base\Services\Service;
-use App\Modules\Books\Models\BookUser;
+use App\Modules\BookUser\Models\BookUser;
 
-class BookService extends Service
+class BookUserService extends Service
 {
     protected $validationRules = [];
 

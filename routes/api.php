@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserApiController;
-use App\Http\Controllers\BookUserApiController;
+use App\Http\Controllers\BookApiController;
 use App\Http\Controllers\NoteApiController;
 
 /*
@@ -22,9 +22,9 @@ Route::post('/register', [UserApiController::class, 'createUser']);
 Route::post('/login', [UserApiController::class, 'login']);
 
 // books
-Route::get('/books', [BookUserApiController::class, 'getBooks']);
-Route::post('/books', [BookUserApiController::class, 'addBook']);
-Route::delete('/books/{isbn}', [BookUserApiController::class, 'deleteBook']);
+Route::get('/books', [BookApiController::class, 'getBooks']);
+Route::post('/books', [BookApiController::class, 'addBook']);
+Route::delete('/books/{isbn}', [BookApiController::class, 'deleteBook']);
 
 // notes
 Route::get('/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);

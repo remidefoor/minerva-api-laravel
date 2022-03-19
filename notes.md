@@ -8,3 +8,4 @@
   - table name
   - has many relationship name
 - different validation rules in service
+- facade in seeder
