@@ -23,7 +23,7 @@ class BookUserSeeder extends Seeder
             ['ISBN' => '9789076174204', 'user_id' => User::where('email', '=', 'harry.potter@hogwarts.wiz')->first()->id],
             ['ISBN' => '9789061697015', 'user_id' => User::where('email', '=', 'harry.potter@hogwarts.wiz')->first()->id],
             ['ISBN' => '9789061697671', 'user_id' => User::where('email', '=', 'harry.potter@hogwarts.wiz')->first()->id],
-            ['ISBN' => '9789061698319', 'user_id' => User::where('email', '=', 'harry.potter@hogwarts.wiz')->first()->id],
+            ['ISBN' => '9789061698319', 'user_id' => User::where('email', '=', 'harry.potter@hogwarts.wiz')->first()->id]
         ]);
     }
 }

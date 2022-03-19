@@ -11,7 +11,7 @@ class Note extends Model
     protected $fillable = [
         'ISBN',
         'user_id',
-        'note',
+        'note'
     ];
 
     public function user() {

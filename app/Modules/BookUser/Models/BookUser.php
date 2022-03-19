@@ -10,7 +10,7 @@ class BookUser extends Model
 {
     protected $fillable = [
         'ISBN',
-        'user_id',
+        'user_id'
     ];
 
     public function user() {
