@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class BookApiController extends Controller
 {
-   public function getUserBooks(Request $request, BookUserService $service) {  // TODO remove request
-       $email = $request->header('email');
-       $id = $this->getUserIdByEmail($email);
+   public function getUserBooks(BookUserService $service, $id) {  // TODO remove request
        $userBooks = $service->getUserBooks($id);
        return response($userBooks)
            ->setStatusCode(200);
@@ -23,9 +21,5 @@ class BookApiController extends Controller
 
    public function deleteUserBook($isbn) {
 
-   }
-
-   private function getUserIdByEmail($email) {  // TODO remove
-       return User::where('email', $email)->first()->id;
    }
 }
