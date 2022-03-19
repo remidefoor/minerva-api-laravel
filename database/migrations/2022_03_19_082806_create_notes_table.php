@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,14 +14,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_user', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
             $table->string('ISBN', 13);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('note');
             $table->timestamps();
 
-            $table->primary(['ISBN', 'user_id']);
+            $table->primary(['id', 'ISBN', 'user_id']);
         });
+
+        DB::statement('ALTER TABLE notes CHANGE id id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL UNIQUE');
     }
 
     /**
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_user');
+        Schema::dropIfExists('notes');
     }
 };
