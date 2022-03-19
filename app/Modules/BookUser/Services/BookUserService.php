@@ -12,4 +12,16 @@ class BookUserService extends Service
     public function __construct(BookUser $model) {
         parent::__construct($model);
     }
+
+    public function getUserBooks($id) {
+        return $this->model->where('user_id', $id)->get();
+    }
+
+    public function addUserBook($data) {
+
+    }
+
+    public function deleteUserBook($isbn, $id) {
+
+    }
 }

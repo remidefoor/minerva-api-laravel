@@ -22,9 +22,9 @@ Route::post('/register', [UserApiController::class, 'createUser']);
 Route::post('/login', [UserApiController::class, 'login']);
 
 // books
-Route::get('/books', [BookApiController::class, 'getBooks']);
-Route::post('/books', [BookApiController::class, 'addBook']);
-Route::delete('/books/{isbn}', [BookApiController::class, 'deleteBook']);
+Route::get('/books', [BookApiController::class, 'getUserBooks']);
+Route::post('/books', [BookApiController::class, 'addUserBook']);
+Route::delete('/books/{isbn}', [BookApiController::class, 'deleteUserBook']);
 
 // notes
 Route::get('/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
