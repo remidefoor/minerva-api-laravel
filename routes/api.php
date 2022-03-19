@@ -17,18 +17,16 @@ use App\Http\Controllers\NoteApiController;
 |
 */
 
-Route::prefix('/api')->group(function() {
-    // auth
-    Route::post('/register', [UserApiController::class, 'register']);
-    Route::post('/login', [UserApiController::class, 'login']);
+// auth
+Route::post('/register', [UserApiController::class, 'createUser']);
+Route::post('/login', [UserApiController::class, 'login']);
 
-    // books
-    Route::get('/books', [BookUserApiController::class, 'getBooks']);
-    Route::post('/books', [BookUserApiController::class, 'addBook']);
-    Route::delete('/books/{isbn}', [BookUserApiController::class, 'deleteBook']);
+// books
+Route::get('/books', [BookUserApiController::class, 'getBooks']);
+Route::post('/books', [BookUserApiController::class, 'addBook']);
+Route::delete('/books/{isbn}', [BookUserApiController::class, 'deleteBook']);
 
-    // notes
-    Route::get('/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
-    Route::post('/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
-    Route::delete('/books/{isbn}/notes/{id}', [NoteApiController::class, 'deleteNote']);
-});
+// notes
+Route::get('/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
+Route::post('/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
+Route::delete('/books/{isbn}/notes/{id}', [NoteApiController::class, 'deleteNote']);

@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Modules\Users\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserApiController extends Controller
 {
-    public function register(Request $request) {
-
+    public function createUser(UserService $service, Request $request) {
+        $data = $request->all();
+        $service->create($data);
+        if ($service->hasErrors()) {
+            return response(['errors' => $service->getErrors()])
+                ->setStatusCode(400);
+        }
+        return response()
+            ->setStatusCode(201);
     }
 
     public function login(Request $request) {
