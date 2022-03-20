@@ -43,8 +43,12 @@ class NoteService extends Service
         ])->first();
     }
 
-    public function deleteNote() {
-
+    public function deleteNote($userId, $isbn, $noteId) {
+        $this->model->where([
+            ['id', $noteId],
+            ['user_id', $userId],
+            ['ISBN', $isbn]
+        ])->delete();
     }
 
     public function noteExists($userId, $isbn, $noteId) {
