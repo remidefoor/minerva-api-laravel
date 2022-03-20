@@ -1,5 +1,6 @@
 # TODO
 - [ ] return user ID on creation
+- [ ] book existance validation
 
 # Questions
 - composite PK in model

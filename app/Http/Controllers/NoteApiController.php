@@ -13,8 +13,15 @@ class NoteApiController extends Controller
             ->setStatusCode(200);
     }
 
-    public function addNote(Request $request, $isbn) {
-
+    public function addNote(NoteService $service, Request $request, $userId, $isbn) {
+        $data = $request->all();
+        $service->addNote($userId, $isbn, $data);
+        if ($service->hasErrors()) {
+            return response(['message' => 'The request contains an invalid body.', 'errors' => $service->getErrors()])
+                ->setStatusCode(400);
+        }
+        return response('')
+            ->setStatusCode(201);
     }
 
     public function deleteNote($isbn, $id) {

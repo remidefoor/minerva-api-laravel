@@ -24,7 +24,7 @@ class UserBookApiController extends Controller
                 ->setStatusCode(400);
         }
 
-        if ($service->userBookExists($userId, $data['ISBN'])) {
+        if ($service->userBookExists($userId, $data['isbn'])) {
             return response(['message' => 'The book is already present in the user\'s library.'])
                 ->setStatusCode(409);
         }

@@ -8,7 +8,7 @@ use App\Modules\UserBooks\Models\BookUser;
 class UserBookService extends Service
 {
     protected $validationRules = [
-        'ISBN' => ['string', 'required']
+        'isbn' => ['string', 'required']
     ];
 
     public function __construct(BookUser $model) {
@@ -25,7 +25,7 @@ class UserBookService extends Service
             $userBook = new BookUser();
 
             $userBook->user_id = $userId;
-            $userBook->ISBN = $data['ISBN'];
+            $userBook->ISBN = $data['isbn'];
 
             $userBook->save();
         }
