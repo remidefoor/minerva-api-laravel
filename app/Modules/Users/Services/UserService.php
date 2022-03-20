@@ -5,6 +5,7 @@ namespace App\Modules\Users\Services;
 use App\Modules\Base\Services\Service;
 use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class UserService extends Service
 {
@@ -20,7 +21,12 @@ class UserService extends Service
     public function createUser($data) {
         $this->validate($data);
         if (!$this->hasErrors()) {
-            $this->model->create($data);
+            $user = new User();
+
+            $user->email = $data['email'];
+            $user->password = Hash::make($data['password']);
+
+            $user->save();
         }
     }
 

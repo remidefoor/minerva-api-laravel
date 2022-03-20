@@ -28,7 +28,7 @@ abstract class Service
         return $this->errors->isNotEmpty();
     }
 
-    protected function validate($data)
+    public function validate($data)
     {
         $this->errors = new MessageBag();
 
