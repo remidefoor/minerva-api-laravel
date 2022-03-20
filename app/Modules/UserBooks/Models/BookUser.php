@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\BookUser\Models;
+namespace App\Modules\UserBooks\Models;
 
 use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -24,7 +24,7 @@ class UserService extends Service
         }
     }
 
-    public function userExists($id) {
-        return $this->find($id) != null;
+    public function userExists($userId) {
+        return $this->find($userId) != null;
     }
 }

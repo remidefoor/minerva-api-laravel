@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserApiController;
-use App\Http\Controllers\BookApiController;
+use App\Http\Controllers\UserBookApiController;
 use App\Http\Controllers\NoteApiController;
 
 /*
@@ -23,9 +23,9 @@ Route::post('/login', [UserApiController::class, 'login']);
 
 Route::middleware('userExists')->group(function() {
     // books
-    Route::get('/users/{userId}/books', [BookApiController::class, 'getUserBooks']);
-    Route::post('/users/{userId}/books', [BookApiController::class, 'addUserBook']);
-    Route::delete('/users/{userId}/books/{isbn}', [BookApiController::class, 'deleteUserBook']);
+    Route::get('/users/{userId}/books', [UserBookApiController::class, 'getUserBooks']);
+    Route::post('/users/{userId}/books', [UserBookApiController::class, 'addUserBook']);
+    Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'deleteUserBook']);
 
     // notes
     Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
