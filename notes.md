@@ -15,3 +15,5 @@
   - model
   - service
 - separate validation
+- cannot delete model
+- empty response with status code

@@ -25,10 +25,12 @@ Route::middleware('userExists')->group(function() {
     // books
     Route::get('/users/{userId}/books', [UserBookApiController::class, 'getUserBooks']);
     Route::post('/users/{userId}/books', [UserBookApiController::class, 'addUserBook']);
-    Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'deleteUserBook']);
+    Route::middleware('userBookExists')->group(function() {
+        Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'deleteUserBook']);
 
-    // notes
-    Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
-    Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
-    Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote']);
+        // notes
+        Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
+        Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
+        Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote']);
+    });
 });

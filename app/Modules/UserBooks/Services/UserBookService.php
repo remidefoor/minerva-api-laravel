@@ -33,15 +33,15 @@ class UserBookService extends Service
 
     private function getUserBook($userId, $isbn) {
         return $userBook = $this->model->where([
-            ['isbn', $isbn],
+            ['ISBN', $isbn],
             ['user_id', $userId]
         ])->first();
     }
 
     public function deleteUserBook($userId, $isbn) {
-        $this->model->where([
-            ['ISBN', '=', $isbn],
-            ['user_id', '=', $userId]
+        $userBook = $this->model->where([
+            ['ISBN', $isbn],
+            ['user_id', $userId]
         ])->delete();
     }
 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Modules\Users\Models\User;
-use App\Modules\Users\Services\UserService;
+use App\Modules\UserBooks\Models\BookUser;
+use App\Modules\UserBooks\Services\UserBookService;
 use Closure;
 use Illuminate\Http\Request;
 
-class EnsureUserExists
+class EnsureBookUserExists
 {
     /**
      * Handle an incoming request.
@@ -19,10 +19,11 @@ class EnsureUserExists
     public function handle(Request $request, Closure $next)
     {
         $userId = $request->route()->parameter('userId');
-        $service = new UserService(new User());
+        $isbn = $request->route()->parameter('isbn');
+        $service = new UserBookService(new BookUser());
 
-        if (!$service->userExists($userId)) {
-            return response(['message' => "The user with ID $userId has not been found."])
+        if (!$service->userBookExists($userId, $isbn)) {
+            return response(['message' => "The book with ISBN $isbn has not been found for the user with ID $userId."])
                 ->setStatusCode(404);
         }
 

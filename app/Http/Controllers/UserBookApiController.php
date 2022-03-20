@@ -35,7 +35,7 @@ class UserBookApiController extends Controller
    }
 
    public function deleteUserBook(UserBookService $service, $userId, $isbn) {
-        $service->deleteUserBook($isbn, $userId);
+        $service->deleteUserBook($userId, $isbn);
         return response('')
             ->setStatusCode(204);
    }
