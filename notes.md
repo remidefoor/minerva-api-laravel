@@ -1,4 +1,5 @@
 # TODO
+- [ ] return user ID on creation
 
 # Questions
 - composite PK in model
@@ -9,3 +10,7 @@
   - has many relationship name
 - different validation rules in service
 - facade in seeder
+- middleware
+  - correct usage
+  - model
+  - service

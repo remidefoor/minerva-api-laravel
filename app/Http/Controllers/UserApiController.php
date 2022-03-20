@@ -11,7 +11,7 @@ class UserApiController extends Controller
         $data = $request->all();
         $service->createUser($data);
         if ($service->hasErrors()) {
-            return response(['errors' => $service->getErrors()])
+            return response(['message' => 'The request contains an invalid body.', 'errors' => $service->getErrors()])
                 ->setStatusCode(400);
         }
         return response()

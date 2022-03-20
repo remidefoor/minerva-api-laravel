@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class BookApiController extends Controller
 {
-   public function getUserBooks(BookUserService $service, $id) {  // TODO remove request
-       $userBooks = $service->getUserBooks($id);
+   public function getUserBooks(BookUserService $service, $userId) {  // TODO remove request
+       $userBooks = $service->getUserBooks($userId);
        return response($userBooks)
            ->setStatusCode(200);
    }

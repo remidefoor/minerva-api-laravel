@@ -23,4 +23,8 @@ class UserService extends Service
             $this->model->create($data);
         }
     }
+
+    public function userExists($id) {
+        return $this->find($id) != null;
+    }
 }
