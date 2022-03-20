@@ -15,17 +15,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->id();
             $table->string('ISBN', 13);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('note');
             $table->timestamps();
-
-            $table->primary(['id', 'ISBN', 'user_id']);
         });
-
-        DB::statement('ALTER TABLE notes CHANGE id id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL UNIQUE');
     }
 
     /**
