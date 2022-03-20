@@ -14,6 +14,13 @@ class Note extends Model
         'note'
     ];
 
+    protected $hidden = [
+        'user_id',
+        'ISBN',
+        'created_at',
+        'updated_at'
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

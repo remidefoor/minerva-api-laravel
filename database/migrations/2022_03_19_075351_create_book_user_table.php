@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('book_user', function (Blueprint $table) {
-            $table->string('ISBN', 13);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('ISBN', 13);
             $table->timestamps();
 
             $table->primary(['ISBN', 'user_id']);
