@@ -24,8 +24,8 @@ class UserBookService extends Service
         if(!$this->hasErrors()) {
             $userBook = new BookUser();
 
-            $userBook->ISBN = $data['ISBN'];
             $userBook->user_id = $userId;
+            $userBook->ISBN = $data['ISBN'];
 
             $userBook->save();
         }
@@ -40,8 +40,8 @@ class UserBookService extends Service
 
     public function deleteUserBook($userId, $isbn) {
         $userBook = $this->model->where([
-            ['ISBN', $isbn],
-            ['user_id', $userId]
+            ['user_id', $userId],
+            ['ISBN', $isbn]
         ])->delete();
     }
 

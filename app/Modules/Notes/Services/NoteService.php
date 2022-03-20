@@ -12,4 +12,23 @@ class NoteService extends Service
     public function __construct(Note $model) {
         parent::__construct($model);
     }
+
+    public function getNotes($userId, $isbn) {
+        return $this->model->where([
+            ['user_id', $userId],
+            ['ISBN', $isbn]
+        ])->get();
+    }
+
+    public function addNote() {
+
+    }
+
+    public function deleteNote() {
+
+    }
+
+    public function noteExists() {
+
+    }
 }
