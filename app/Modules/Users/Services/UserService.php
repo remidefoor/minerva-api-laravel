@@ -27,6 +27,8 @@ class UserService extends Service
             $user->password = Hash::make($data['password']);
 
             $user->save();
+
+            $this->result = $user->id;
         }
     }
 

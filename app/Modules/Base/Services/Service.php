@@ -9,6 +9,7 @@ use Illuminate\Support\MessageBag;
 abstract class Service
 {
     protected $model;
+    protected $result;
     private $errors;
     protected $validationRules;
 
@@ -16,6 +17,10 @@ abstract class Service
     {
         $this->model = $model;
         $this->errors = new MessageBag();
+    }
+
+    public function getResult() {
+        return $this->result;
     }
 
     public function getErrors()
