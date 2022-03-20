@@ -35,11 +35,19 @@ class NoteService extends Service
         }
     }
 
+    private function getNote($userId, $isbn, $noteId) {
+        return $this->model->where([
+            ['id', $noteId],
+            ['user_id', $userId],
+            ['ISBN', $isbn]
+        ])->first();
+    }
+
     public function deleteNote() {
 
     }
 
-    public function noteExists() {
-
+    public function noteExists($userId, $isbn, $noteId) {
+        return $this->getNote($userId, $isbn, $noteId) != null;
     }
 }

@@ -31,6 +31,7 @@ Route::middleware('userExists')->group(function() {
         // notes
         Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
         Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
-        Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote']);
+        Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote'])
+            ->middleware('noteExists');
     });
 });

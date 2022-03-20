@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Modules\UserBooks\Models\BookUser;
-use App\Modules\UserBooks\Services\UserBookService;
+use App\Modules\Notes\Models\Note;
+use App\Modules\Notes\Services\NoteService;
 use Closure;
 use Illuminate\Http\Request;
 
-class EnsureBookUserExists
+class EnsureNoteExists
 {
     /**
      * Handle an incoming request.
@@ -20,10 +20,11 @@ class EnsureBookUserExists
     {
         $userId = $request->route()->parameter('userId');
         $isbn = $request->route()->parameter('isbn');
-        $service = new UserBookService(new BookUser());
+        $noteId = $request->route()->parameter('noteId');
+        $service = new NoteService(new Note());
 
-        if (!$service->userBookExists($userId, $isbn)) {
-            return response(['message' => "The book with ISBN $isbn has not been found for the current user."])
+        if (!$service->noteExists($userId, $isbn, $noteId)) {
+            return response(['message' => "A note with ID $noteId has not been found for the current user and book."])
                 ->setStatusCode(404);
         }
 
