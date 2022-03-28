@@ -16,9 +16,9 @@ class NoteApiController extends Controller
     public function addNote(NoteService $service, Request $request, $userId, $isbn) {
         $data = $request->all();
         $service->addNote($userId, $isbn, $data);
-        if ($service->hasErrors()) {
-            return response(['message' => 'The request contains an invalid body.', 'errors' => $service->getErrors()])
-                ->setStatusCode(400);
+        if ($service->hasError()) {
+            return response(['message' => $service->getError()->getMessage(), 'errors' => $service->getError()->getErrors()])
+                ->setStatusCode($service->getError()->getStatusCode());
         }
         return response(['id' => $service->getResult()])
             ->setStatusCode(201);

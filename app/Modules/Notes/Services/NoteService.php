@@ -23,8 +23,8 @@ class NoteService extends Service
     }
 
     public function addNote($userId, $isbn, $data) {
-        $this->validate($data);
-        if (!$this->hasErrors()) {
+        $this->validate($data, $this->validationRules);
+        if (!$this->hasError()) {
             $note = new Note();
 
             $note->user_id = $userId;
