@@ -25,7 +25,7 @@ abstract class Service
 
     public function getErrors()
     {
-        return $this->errors;
+        return $this->errors->all();
     }
 
     public function hasErrors()

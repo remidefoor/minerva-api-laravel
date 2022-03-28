@@ -32,6 +32,8 @@ class NoteService extends Service
             $note->note = $data['note'];
 
             $note->save();
+
+            $this->result = $note->id;
         }
     }
 

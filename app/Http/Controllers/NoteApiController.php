@@ -20,7 +20,7 @@ class NoteApiController extends Controller
             return response(['message' => 'The request contains an invalid body.', 'errors' => $service->getErrors()])
                 ->setStatusCode(400);
         }
-        return response('')
+        return response(['id' => $service->getResult()])
             ->setStatusCode(201);
     }
 
