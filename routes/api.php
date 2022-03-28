@@ -19,7 +19,7 @@ use App\Http\Controllers\NoteApiController;
 
 // users
 Route::post('/users', [UserApiController::class, 'createUser']);
-Route::post('/login', [UserApiController::class, 'login']);
+Route::post('/users/log-in', [UserApiController::class, 'logIn']);
 
 Route::middleware('userExists')->group(function() {
     // books

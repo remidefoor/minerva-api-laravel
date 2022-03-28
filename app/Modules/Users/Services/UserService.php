@@ -3,14 +3,17 @@
 namespace App\Modules\Users\Services;
 
 use App\Modules\Base\Services\Service;
+use App\Modules\Errors\Models\Error;
 use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 class UserService extends Service
 {
     protected $validationRules = [
-        'email' => ['email', 'required', 'unique:users'],
+        'email' => ['email', 'required'],
         'password' => ['string', 'required']
     ];
 
@@ -18,9 +21,13 @@ class UserService extends Service
         parent::__construct($model);
     }
 
+    public function emailIsAvailalbe($email) {
+        return $this->model->where('email', $email)->get()->isEmpty();
+    }
+
     public function createUser($data) {
-        $this->validate($data);
-        if (!$this->hasErrors()) {
+        $this->validate($data, $this->validationRules);
+        if (!$this->hasError() && $this->emailIsAvailalbe($data['email'])) {
             $user = new User();
 
             $user->email = $data['email'];
@@ -29,6 +36,22 @@ class UserService extends Service
             $user->save();
 
             $this->result = $user->id;
+        } else {
+            $this->setError(new Error('The email is already taken.', 409));
+        }
+    }
+
+    public function login($data) {
+        $this->validate($data, $this->validationRules);
+        if (!$this->hasError() && !$this->emailIsAvailalbe($data['email'])) {
+            $user = $this->model->where('email', $data['email'])->first();
+            if (Hash::check($data['password'], $user->password)) {
+                $this->result = $user->id;
+            } else {
+                $this->setError(new Error('The username or password is invalid.', 403));
+            }
+        } else {
+            $this->setError(new Error('The username or password is invalid.', 403));
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Modules\UserBooks\Services;
 
 use App\Modules\Base\Services\Service;
+use App\Modules\Errors\Models\Error;
 use App\Modules\UserBooks\Models\BookUser;
 
 class UserBookService extends Service
@@ -20,14 +21,16 @@ class UserBookService extends Service
     }
 
     public function addUserBook($userId, $data) {
-        $this->validate($data);
-        if(!$this->hasErrors()) {
+        $this->validate($data, $this->validationRules);
+        if(!$this->hasError() && !$this->userBookExists($userId, $data['isbn'])) {
             $userBook = new BookUser();
 
             $userBook->user_id = $userId;
             $userBook->ISBN = $data['isbn'];
 
             $userBook->save();
+        } else {
+            $this->setError(new Error('The book is already present in the user\'s library.', 409));
         }
     }
 
