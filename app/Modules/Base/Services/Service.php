@@ -2,6 +2,7 @@
 
 namespace App\Modules\Base\Services;
 
+use App\Modules\Errors\Models\Error;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -10,35 +11,42 @@ abstract class Service
 {
     protected $model;
     protected $result;
-    private $errors;
+    private $error;
     protected $validationRules;
 
     public function __construct(Model $model)
     {
         $this->model = $model;
-        $this->errors = new MessageBag();
     }
 
     public function getResult() {
         return $this->result;
     }
 
-    public function getErrors()
+    public function getError()
     {
-        return $this->errors->all();
+        return $this->error;
     }
 
-    public function hasErrors()
-    {
-        return $this->errors->isNotEmpty();
+    public function setError($error) {
+        if (is_null($this->error)) {
+            $this->error = $error;
+        }
     }
 
-    public function validate($data)
+    public function hasError()
     {
-        $this->errors = new MessageBag();
+        return isset($this->error);
+    }
 
-        $validator = Validator::make($data, $this->validationRules);
-        if ($validator->fails()) $this->errors = $validator->errors();
+    public function validate($data, $validationRules)
+    {
+        $validator = Validator::make($data, $validationRules);
+        if ($validator->fails()) $this->error = new Error(
+            'The request contains an invalid body.',
+            400,
+            $validator->errors()->toArray()
+        );
     }
 
     public function find($id) {

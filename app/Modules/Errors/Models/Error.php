@@ -6,12 +6,18 @@ use Illuminate\Support\MessageBag;
 
 class Error
 {
+    private $message;
     private $statusCode;
     private $errors;
 
-    public function __construct($statusCode, $errorsArray) {
+    public function __construct($message, $statusCode, $associativeErrorArray = []) {
+        $this->message = $message;
         $this->statusCode = $statusCode;
-        $this->errors = $errorsArray;
+        $this->errors = new MessageBag($associativeErrorArray);
+    }
+
+    public function getMessage() {
+        return $this->message;
     }
 
     public function getStatusCode() {
@@ -19,6 +25,6 @@ class Error
     }
 
     public function getErrors() {
-        return $this->errors;
+        return $this->errors->all();
     }
 }

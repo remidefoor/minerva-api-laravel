@@ -17,19 +17,13 @@ class UserBookApiController extends Controller
 
    public function addUserBook(UserBookService $service, Request $request, $userId) {
         $data = $request->all();
+       $service->addUserBook($userId, $data);
 
-        $service->validate($data);
-        if ($service->hasErrors()) {
-            return response(['message' => 'The request contains an invalid body.', 'errors' => $service->getErrors()])
-                ->setStatusCode(400);
+       if ($service->hasError()) {
+            return response(['message' => $service->getError()->getMessage(), 'errors' => $service->getError()->getErrors()])
+                ->setStatusCode($service->getError()->getStatusCode());
         }
 
-        if ($service->userBookExists($userId, $data['isbn'])) {
-            return response(['message' => 'The book is already present in the user\'s library.'])
-                ->setStatusCode(409);
-        }
-
-        $service->addUserBook($userId, $data);
         return response('')
             ->setStatusCode(201);
    }
