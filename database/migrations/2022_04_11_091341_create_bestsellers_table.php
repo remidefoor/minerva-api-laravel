@@ -27,6 +27,8 @@ return new class extends Migration
            $table->string('title');
            $table->timestamp('created_at')->useCurrent();
            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+
+           $table->primary(['bestseller_id', 'language']);
         });
     }
 
