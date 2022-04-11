@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('bestsellers', function (Blueprint $table) {
             $table->id();
-            $table->integer('sold_copies');
+            $table->integer('copies_sold');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
