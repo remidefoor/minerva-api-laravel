@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('ISBN', 13);
             $table->string('note');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('update_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
