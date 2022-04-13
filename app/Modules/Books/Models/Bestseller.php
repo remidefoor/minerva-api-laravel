@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bestsellers\Models;
+namespace App\Modules\Books\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +17,7 @@ class Bestseller extends Model
         'updated_at'
     ];
 
-    public function bestsellers_language() {
+    public function translations() {
         return $this->hasMany(BestsellerLanguage::class);
     }
 }

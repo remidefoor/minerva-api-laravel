@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Modules\Bestsellers\Models;
+namespace App\Modules\Books\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BestsellerLanguage extends Model
 {
+    protected $table = 'bestsellers_language';
+
     protected $fillable = [
         'bestseller_id',
         'language',

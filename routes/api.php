@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserApiController;
 use App\Http\Controllers\UserBookApiController;
 use App\Http\Controllers\NoteApiController;
+use App\Http\Controllers\BookApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::post('/users', [UserApiController::class, 'createUser']);
 Route::post('/users/log-in', [UserApiController::class, 'logIn']);
 
 Route::middleware('userExists')->group(function() {
-    // books
+    // user books
     Route::get('/users/{userId}/books', [UserBookApiController::class, 'getUserBooks']);
     Route::post('/users/{userId}/books', [UserBookApiController::class, 'addUserBook']);
     Route::middleware('userBookExists')->group(function() {
@@ -35,3 +36,5 @@ Route::middleware('userExists')->group(function() {
             ->middleware('noteExists');
     });
 });
+
+Route::get('/books/bestsellers', [BookApiController::class, 'getBestsellers']);
