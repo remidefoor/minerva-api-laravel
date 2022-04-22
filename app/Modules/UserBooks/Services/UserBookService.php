@@ -22,6 +22,7 @@ class UserBookService extends Service
     public function retrieveUserBooks($userId) {
         $this->userService->ensureUserExists($userId);
         if ($this->userService->hasError()) throw $this->userService->getError();
+
         return $this->model->where('user_id', $userId)->get();
     }
 
@@ -60,10 +61,12 @@ class UserBookService extends Service
 
     public function removeUserBook($userId, $isbn) {
         $this->userService->ensureUserExists($userId);
-        if ($this->userService->hasError()) $this->setError($this->userService->getError());
-
-        $this->ensureUserBookExists($userId, $isbn);
-        if (!$this->hasError()) $this->deleteUserBook($userId, $isbn);
+        if ($this->userService->hasError()) {
+            $this->setError($this->userService->getError());
+        } else {
+            $this->ensureUserBookExists($userId, $isbn);
+            if (!$this->hasError()) $this->deleteUserBook($userId, $isbn);
+        }
 }
 
     private function deleteUserBook($userId, $isbn) {

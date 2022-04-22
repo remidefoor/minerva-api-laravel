@@ -22,7 +22,17 @@ class NoteService extends Service
         $this->userBookService = $userBookService;
     }
 
-    public function getNotes($userId, $isbn) {
+    public function retrieveNotes($userId, $isbn) {
+        $this->userService->ensureUserExists($userId);
+        if ($this->userService->hasError()) throw $this->userService->getError();
+
+        $this->userBookService->ensureUserBookExists($userId, $isbn);
+        if ($this->userBookService->hasError()) throw $this->userBookService->getError();
+
+        return $this->readNotes($userId, $isbn);
+    }
+
+    private function readNotes($userId, $isbn) {
         return $this->model->where([
             ['user_id', $userId],
             ['ISBN', $isbn]
