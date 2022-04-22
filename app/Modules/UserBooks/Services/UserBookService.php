@@ -3,7 +3,7 @@
 namespace App\Modules\UserBooks\Services;
 
 use App\Modules\Base\Services\Service;
-use App\Modules\Errors\Models\Error;
+use App\Modules\Validation\Models\Error;
 use App\Modules\UserBooks\Models\BookUser;
 
 class UserBookService extends Service
@@ -21,7 +21,7 @@ class UserBookService extends Service
     }
 
     public function addUserBook($userId, $data) {
-        $this->validate($data, $this->validationRules);
+        $this->validate($data);
         if(!$this->hasError() && !$this->userBookExists($userId, $data['isbn'])) {
             $userBook = new BookUser();
 

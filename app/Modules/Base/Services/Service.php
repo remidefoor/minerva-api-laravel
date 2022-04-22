@@ -2,7 +2,7 @@
 
 namespace App\Modules\Base\Services;
 
-use App\Modules\Errors\Models\Error;
+use App\Modules\Validation\Models\Error;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -39,9 +39,9 @@ abstract class Service
         return isset($this->error);
     }
 
-    public function validate($data, $validationRules)
+    public function validate($data)
     {
-        $validator = Validator::make($data, $validationRules);
+        $validator = Validator::make($data, $this->validationRules);
         if ($validator->fails()) $this->error = new Error(
             'The request contains an invalid body.',
             400,

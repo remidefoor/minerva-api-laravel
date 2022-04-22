@@ -3,7 +3,7 @@
 namespace App\Modules\Users\Services;
 
 use App\Modules\Base\Services\Service;
-use App\Modules\Errors\Models\Error;
+use App\Modules\Validation\Models\Error;
 use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +26,7 @@ class UserService extends Service
     }
 
     public function createUser($data) {
-        $this->validate($data, $this->validationRules);
+        $this->validate($data);
         if (!$this->hasError() && $this->emailIsAvailalbe($data['email'])) {
             $user = new User();
 
@@ -42,7 +42,7 @@ class UserService extends Service
     }
 
     public function login($data) {
-        $this->validate($data, $this->validationRules);
+        $this->validate($data);
         if (!$this->hasError() && !$this->emailIsAvailalbe($data['email'])) {
             $user = $this->model->where('email', $data['email'])->first();
             if (Hash::check($data['password'], $user->password)) {

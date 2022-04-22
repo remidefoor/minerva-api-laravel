@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Errors\Models;
+namespace App\Modules\Validation\Models;
 
 use Illuminate\Support\MessageBag;
 
