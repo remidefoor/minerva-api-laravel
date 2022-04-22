@@ -4,24 +4,13 @@ namespace App\Modules\Validation\Models;
 
 use Illuminate\Support\MessageBag;
 
-class Error
+class Error extends \Exception
 {
-    private $message;
-    private $statusCode;
     private $errors;
 
-    public function __construct($message, $statusCode, $associativeErrorArray = []) {
-        $this->message = $message;
-        $this->statusCode = $statusCode;
+    public function __construct($message, $code, $associativeErrorArray = []) {
+        parent::__construct($message, $code);
         $this->errors = new MessageBag($associativeErrorArray);
-    }
-
-    public function getMessage() {
-        return $this->message;
-    }
-
-    public function getStatusCode() {
-        return $this->statusCode;
     }
 
     public function getErrors() {

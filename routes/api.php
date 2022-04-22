@@ -24,7 +24,7 @@ Route::post('/users/log-in', [UserApiController::class, 'logIn']);
 
 // user books
 Route::get('/users/{userId}/books', [UserBookApiController::class, 'getUserBooks']);
-Route::post('/users/{userId}/books', [UserBookApiController::class, 'addUserBook']);
+Route::post('/users/{userId}/books', [UserBookApiController::class, 'postUserBook']);
 Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'deleteUserBook']);
 
 // notes

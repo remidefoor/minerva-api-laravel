@@ -18,7 +18,7 @@ class NoteApiController extends Controller
         $service->addNote($userId, $isbn, $data);
         if ($service->hasError()) {
             return response(['message' => $service->getError()->getMessage(), 'errors' => $service->getError()->getErrors()])
-                ->setStatusCode($service->getError()->getStatusCode());
+                ->setStatusCode($service->getError()->getCode());
         }
         return response(['id' => $service->getResult()])
             ->setStatusCode(201);

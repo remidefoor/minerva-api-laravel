@@ -12,7 +12,7 @@ class UserApiController extends Controller
         $service->createUser($data);
         if ($service->hasError()) {
             return response(['message' => $service->getError()->getMessage(), 'errors' => $service->getError()->getErrors()])
-                ->setStatusCode($service->getError()->getStatusCode());
+                ->setStatusCode($service->getError()->getCode());
         }
         return response(['id' => $service->getResult()])
             ->setStatusCode(201);
@@ -23,7 +23,7 @@ class UserApiController extends Controller
         $service->login($data);
         if ($service->hasError()) {
             return response(['message' => $service->getError()->getMessage(), 'errors' => $service->getError()->getErrors()])
-                ->setStatusCode($service->getError()->getStatusCode());
+                ->setStatusCode($service->getError()->getCode());
         }
         return response(['id' => $service->getResult()])
             ->setStatusCode(200);

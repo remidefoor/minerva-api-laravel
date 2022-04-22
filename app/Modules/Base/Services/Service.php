@@ -42,11 +42,11 @@ abstract class Service
     public function validate($data)
     {
         $validator = Validator::make($data, $this->validationRules);
-        if ($validator->fails()) $this->error = new Error(
+        if ($validator->fails()) $this->setError(new Error(
             'The request contains an invalid body.',
             400,
             $validator->errors()->toArray()
-        );
+        ));
     }
 
     public function find($id) {

@@ -55,7 +55,13 @@ class UserService extends Service
         }
     }
 
-    public function userExists($userId) {
+    public function ensureUserExists($userId) {
+        if (!$this->userExists($userId)) {
+            $this->setError(new Error("The user with ID $userId has not been found.", 404));
+        }
+    }
+
+    private function userExists($userId) {
         return $this->find($userId) != null;
     }
 }
