@@ -29,7 +29,7 @@ Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'de
 
 // notes
 Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
-Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
+Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'postNote']);
 Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote']);
 
 Route::get('/books/bestsellers', [BookApiController::class, 'getBestsellers']);

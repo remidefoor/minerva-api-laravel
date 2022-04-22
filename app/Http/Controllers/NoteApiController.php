@@ -13,7 +13,7 @@ class NoteApiController extends Controller
             ->setStatusCode(200);
     }
 
-    public function addNote(NoteService $service, Request $request, $userId, $isbn) {
+    public function postNote(NoteService $service, Request $request, $userId, $isbn) {
         $data = $request->all();
         $service->addNote($userId, $isbn, $data);
         if ($service->hasError()) {
