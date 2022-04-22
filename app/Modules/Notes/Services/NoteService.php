@@ -74,7 +74,22 @@ class NoteService extends Service
         $this->result = $note->id;
     }
 
-    public function deleteNote($userId, $isbn, $noteId) {
+    public function removeNote($userId, $isbn, $noteId) {
+        $this->userService->ensureUserExists($userId);
+        if ($this->userService->hasError()) {
+            $this->setError($this->userService->getError());
+        } else {
+            $this->userBookService->ensureUserBookExists($userId, $isbn);
+            if ($this->userBookService->hasError()) {
+                $this->setError($this->userBookService->getError());
+            } else {
+                $this->ensureNoteExists($userId, $isbn, $noteId);
+                if (!$this->hasError()) $this->deleteNote($userId, $isbn, $noteId);
+            }
+        }
+    }
+
+    private function deleteNote($userId, $isbn, $noteId) {
         $this->model->where([
             ['id', $noteId],
             ['user_id', $userId],
@@ -88,7 +103,7 @@ class NoteService extends Service
         }
     }
 
-    public function noteExists($userId, $isbn, $noteId) {
+    private function noteExists($userId, $isbn, $noteId) {
         return $this->getNote($userId, $isbn, $noteId) != null;
     }
 }

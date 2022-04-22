@@ -31,7 +31,13 @@ class NoteApiController extends Controller
     }
 
     public function deleteNote(NoteService $service, $userId, $isbn, $noteId) {
-        $service->deleteNote($userId, $isbn, $noteId);
+        $service->removeNote($userId, $isbn, $noteId);
+
+        if ($service->hasError()) {
+            return response(['message' => $service->getError()->getMessage(), 'errors' => $service->getError()->getErrors()])
+                ->setStatusCode($service->getError()->getCode());
+        }
+
         return response('')
                 ->setStatusCode(204);
     }
