@@ -39,27 +39,39 @@ class NoteService extends Service
         ])->get();
     }
 
-    public function addNote($userId, $isbn, $data) {
-        $this->validate($data);
-        if (!$this->hasError()) {
-            $note = new Note();
-
-            $note->user_id = $userId;
-            $note->ISBN = $isbn;
-            $note->note = $data['note'];
-
-            $note->save();
-
-            $this->result = $note->id;
-        }
-    }
-
     private function getNote($userId, $isbn, $noteId) {
         return $this->model->where([
             ['id', $noteId],
             ['user_id', $userId],
             ['ISBN', $isbn]
         ])->first();
+    }
+
+    public function addNote($userId, $isbn, $data) {
+        $this->userService->ensureUserExists($userId);
+        if ($this->userService->hasError()) {
+            $this->setError($this->userService->getError());
+        } else {
+            $this->userBookService->ensureUserBookExists($userId, $isbn);
+            if ($this->userBookService->hasError()) {
+                $this->setError($this->userBookService->getError());
+            } else {
+                $this->validate($data);
+                if (!$this->hasError()) $this->createNote($userId, $isbn, $data['note']);
+            }
+        }
+    }
+
+    private function createNote($userId, $isbn, $noteText) {
+        $note = new Note();
+
+        $note->user_id = $userId;
+        $note->ISBN = $isbn;
+        $note->note = $noteText;
+
+        $note->save();
+
+        $this->result = $note->id;
     }
 
     public function deleteNote($userId, $isbn, $noteId) {

@@ -26,14 +26,23 @@ class UserBookService extends Service
         return $this->model->where('user_id', $userId)->get();
     }
 
+    private function getUserBook($userId, $isbn) {
+        return $userBook = $this->model->where([
+            ['ISBN', $isbn],
+            ['user_id', $userId]
+        ])->first();
+    }
+
     public function addUserBook($userId, $data) {
         $this->userService->ensureUserExists($userId);
-        if ($this->userService->hasError()) $this->setError($this->userService->getError());
-
-        $this->validate($data);
-        if(!$this->hasError()) {
-            $this->ensureUserBookNotExists($userId, $data['isbn']);
-            if (!$this->hasError()) $this->createUserBook($userId, $data['isbn']);
+        if ($this->userService->hasError()) {
+            $this->setError($this->userService->getError());
+        } else {
+            $this->validate($data);
+            if(!$this->hasError()) {
+                $this->ensureUserBookNotExists($userId, $data['isbn']);
+                if (!$this->hasError()) $this->createUserBook($userId, $data['isbn']);
+            }
         }
     }
 
@@ -50,13 +59,6 @@ class UserBookService extends Service
         $userBook->ISBN = $isbn;
 
         $userBook->save();
-    }
-
-    private function getUserBook($userId, $isbn) {
-        return $userBook = $this->model->where([
-            ['ISBN', $isbn],
-            ['user_id', $userId]
-        ])->first();
     }
 
     public function removeUserBook($userId, $isbn) {
