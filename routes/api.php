@@ -22,19 +22,14 @@ use App\Http\Controllers\BookApiController;
 Route::post('/users', [UserApiController::class, 'createUser']);
 Route::post('/users/log-in', [UserApiController::class, 'logIn']);
 
-Route::middleware('userExists')->group(function() {
-    // user books
-    Route::get('/users/{userId}/books', [UserBookApiController::class, 'getUserBooks']);
-    Route::post('/users/{userId}/books', [UserBookApiController::class, 'addUserBook']);
-    Route::middleware('userBookExists')->group(function() {
-        Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'deleteUserBook']);
+// user books
+Route::get('/users/{userId}/books', [UserBookApiController::class, 'getUserBooks']);
+Route::post('/users/{userId}/books', [UserBookApiController::class, 'addUserBook']);
+Route::delete('/users/{userId}/books/{isbn}', [UserBookApiController::class, 'deleteUserBook']);
 
-        // notes
-        Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
-        Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
-        Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote'])
-            ->middleware('noteExists');
-    });
-});
+// notes
+Route::get('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'getNotes']);
+Route::post('/users/{userId}/books/{isbn}/notes', [NoteApiController::class, 'addNote']);
+Route::delete('/users/{userId}/books/{isbn}/notes/{noteId}', [NoteApiController::class, 'deleteNote']);
 
 Route::get('/books/bestsellers', [BookApiController::class, 'getBestsellers']);
