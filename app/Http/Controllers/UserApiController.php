@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserApiController extends Controller
 {
-    public function createUser(UserService $service, Request $request) {
+    public function postUser(UserService $service, Request $request) {
         $data = $request->all();
         $service->createUser($data);
         if ($service->hasError()) {

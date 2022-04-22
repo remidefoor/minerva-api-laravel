@@ -19,7 +19,7 @@ use App\Http\Controllers\BookApiController;
 */
 
 // users
-Route::post('/users', [UserApiController::class, 'createUser']);
+Route::post('/users', [UserApiController::class, 'postUser']);
 Route::post('/users/log-in', [UserApiController::class, 'logIn']);
 
 // user books
