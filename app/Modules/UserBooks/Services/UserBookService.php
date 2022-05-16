@@ -11,7 +11,7 @@ class UserBookService extends Service
 {
     private $userService;
     protected $validationRules = [
-        'isbn' => ['string', 'required']
+        'ISBN' => ['string', 'required']
     ];
 
     public function __construct(BookUser $model, UserService $userService) {
@@ -40,8 +40,8 @@ class UserBookService extends Service
         } else {
             $this->validate($data);
             if(!$this->hasError()) {
-                $this->ensureUserBookNotExists($userId, $data['isbn']);
-                if (!$this->hasError()) $this->createUserBook($userId, $data['isbn']);
+                $this->ensureUserBookNotExists($userId, $data['ISBN']);
+                if (!$this->hasError()) $this->createUserBook($userId, $data['ISBN']);
             }
         }
     }
